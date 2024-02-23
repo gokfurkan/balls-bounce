@@ -13,3 +13,8 @@ MonoBehaviour:
   m_Name: Ball_V1
   m_EditorClassIdentifier: 
   incomeAmount: 1
+  interactLayers:
+    serializedVersion: 2
+    m_Bits: 448
+  startForceXRandom: {x: -5, y: 5}
+  firstInteractionForceY: 7

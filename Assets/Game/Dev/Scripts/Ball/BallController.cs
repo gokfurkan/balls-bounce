@@ -1,25 +1,28 @@
-﻿using Game.Dev.Scripts.Scriptables;
+﻿using System;
+using Game.Dev.Scripts.Scriptables;
 using Template.Scripts;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Game.Dev.Scripts.Ball
 {
     public class BallController : MonoBehaviour
     {
         public BallOptions ballOptions;
-        public Rigidbody rb;
         
-        [Space(10)] 
-        public LayerMask interactLayers;
-        public Vector2Int startForceXRandom;
-        public float firstInteractionForceY;
-
+        private Rigidbody rb;
         private bool hasFirstCollision;
-        
+
+        private void Awake()
+        {
+            rb = GetComponent<Rigidbody>();
+        }
+
         public void InitBall()
         {
             hasFirstCollision = false;
-            rb.AddForce(new Vector3(Random.Range(startForceXRandom.x , startForceXRandom.y) , 0) , ForceMode.Impulse);
+            var randomX = Random.Range(ballOptions.startForceXRandom.x, ballOptions.startForceXRandom.y); 
+            rb.AddForce(new Vector3(randomX, 0) , ForceMode.Impulse);
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -29,11 +32,11 @@ namespace Game.Dev.Scripts.Ball
 
         private void ControlFirstInteraction(Collision collision)
         {
-            if (!ExtensionsMethods.IsInLayerMask(collision.gameObject.layer , interactLayers)) return;
+            if (!ExtensionsMethods.IsInLayerMask(collision.gameObject.layer , ballOptions.interactLayers)) return;
             if (hasFirstCollision) return;
 
             hasFirstCollision = true;
-            rb.velocity = new Vector3(rb.velocity.x , firstInteractionForceY);
+            rb.velocity = new Vector3(rb.velocity.x , ballOptions.firstInteractionForceY);
         }
 
         public void ResetMovement()

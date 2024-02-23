@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 namespace Game.Dev.Scripts.Ball
 {
-    public class BallManager : MonoBehaviour
+    public class BallManager : Singleton<BallManager>
     {
         public List<BallController> balls;
 
