@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Dev.Scripts.Ball;
 using UnityEngine;
 
 namespace Game.Dev.Scripts
@@ -17,6 +18,9 @@ namespace Game.Dev.Scripts
         
         public static Action OnSpawnMoneys;
         public static void CallSpawnMoneys() { OnSpawnMoneys?.Invoke(); }
+        
+        public static Action <Transform> OnSpawnIncomeVisual;
+        public static void CallSpawnIncomeVisual(Transform pos) { OnSpawnIncomeVisual?.Invoke(pos); }
         
         //Game Manager
         
@@ -39,5 +43,16 @@ namespace Game.Dev.Scripts
         
         public static Action OnMouseClickUp;
         public static void CallMouseClickUp() { OnMouseClickUp?.Invoke(); }
+        
+        //Upgrades
+        
+        public static Action OnAddBall;
+        public static void CallAddBall() { OnAddBall?.Invoke(); }
+        
+        public static Action OnMergeBall;
+        public static void CallMergeBall() { OnMergeBall?.Invoke(); }
+        
+        public static Action <BallController> OnReSpawnBall;
+        public static void CallReSpawnBall(BallController ball) { OnReSpawnBall?.Invoke(ball); }
     }
 }

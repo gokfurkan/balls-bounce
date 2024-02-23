@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Game.Dev.Scripts;
 using UnityEngine;
 
@@ -55,6 +56,11 @@ namespace Template.Scripts
         private string GetSavePath()
         {
             return Application.persistentDataPath + "/saveData.json";
+        }
+
+        private void OnApplicationQuit()
+        {
+            SaveManager.instance.Save();
         }
     }
 }

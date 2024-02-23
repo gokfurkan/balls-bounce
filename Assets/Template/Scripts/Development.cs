@@ -32,6 +32,11 @@ namespace Game.Dev.Scripts
             {
                 BusSystem.CallAddMoneys(1000);
             }
+            
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                BusSystem.CallAddBall();
+            }
         }
 #endif
     }

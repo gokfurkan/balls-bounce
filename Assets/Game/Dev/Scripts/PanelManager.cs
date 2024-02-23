@@ -42,7 +42,7 @@ namespace Game.Dev.Scripts
             Activate(PanelType.Money);
             Activate(PanelType.Level);
             Activate(PanelType.OpenSettings);
-            Activate(PanelType.Restart);
+            // Activate(PanelType.Restart);
         }
 
         private void ActivateGamePanel()

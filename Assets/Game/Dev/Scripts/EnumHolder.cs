@@ -40,4 +40,10 @@
     {
         GameStart,
     }
+
+    public enum PoolType
+    {
+        Ball,
+        IncomeVisual,
+    }
 }

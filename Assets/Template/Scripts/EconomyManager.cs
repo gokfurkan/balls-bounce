@@ -44,7 +44,6 @@ namespace Template.Scripts
             newMoneyTarget = newAmount;
             
             SaveManager.instance.saveData.moneys = newAmount;
-            SaveManager.instance.Save();
 
             SetMoneyText();
         }
