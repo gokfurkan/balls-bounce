@@ -53,8 +53,8 @@ namespace Game.Dev.Scripts.Ball
 
         private void ReSpawnBall(BallController ball)
         {
+            ball.OnReSpawnBall();
             ball.gameObject.SetActive(false);
-            ball.ResetMovement();
             ball.transform.position = spawnPos.position;
             ball.gameObject.SetActive(true);
             ball.InitBall();

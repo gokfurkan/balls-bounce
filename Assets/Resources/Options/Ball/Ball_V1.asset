@@ -18,3 +18,4 @@ MonoBehaviour:
     m_Bits: 448
   startForceXRandom: {x: -5, y: 5}
   firstInteractionForceY: 7
+  trailReActivateDelay: 2
