@@ -5,6 +5,7 @@ namespace Game.Dev.Scripts.Scriptables
     [CreateAssetMenu(fileName = "BallOptions", menuName = "ScriptableObjects/BallOptions")]
     public class BallOptions : ScriptableObject
     {
+        public int level;
         public int incomeAmount;
         
         [Space(10)]

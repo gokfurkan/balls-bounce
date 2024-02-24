@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe93d0e19da84160926cb727826f8136, type: 3}
   m_Name: Ball_V1
   m_EditorClassIdentifier: 
+  level: 1
   incomeAmount: 1
   interactLayers:
     serializedVersion: 2
     m_Bits: 448
   startForceXRandom: {x: -5, y: 5}
   firstInteractionForceY: 7
-  trailReActivateDelay: 2

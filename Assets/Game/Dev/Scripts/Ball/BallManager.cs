@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Sirenix.OdinInspector;
 using Template.Scripts;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -39,9 +41,17 @@ namespace Game.Dev.Scripts.Ball
             SpawnBall(createdBallController);
         }
 
+        [Button]
         private void MergeBall()
         {
-            
+            List<BallController> highestBalls = FindMergeBalls();
+            if (highestBalls.Count < 2) return;
+           
+            for (int i = 0; i < 2; i++)
+            {
+                balls.Remove(highestBalls[i]);
+                Pooling.instance.poolObjects[(int)PoolType.Ball].PutItem(highestBalls[i].gameObject);
+            }
         }
 
         private void SpawnBall(BallController ball)
@@ -58,6 +68,59 @@ namespace Game.Dev.Scripts.Ball
             ball.transform.position = spawnPos.position;
             ball.gameObject.SetActive(true);
             ball.InitBall();
+        }
+        
+        private List<BallController> FindMergeBalls()
+        {
+            List<BallController> mergeBalls = new List<BallController>();
+            
+            Dictionary<int, int> levelCounts = new Dictionary<int, int>();
+            
+            foreach (BallController ball in balls)
+            {
+                int ballLevel = ball.ballOptions.level;
+        
+                if (!levelCounts.TryAdd(ballLevel, 1))
+                {
+                    levelCounts[ballLevel]++;
+                }
+            }
+            
+            var sortedLevels = levelCounts.Keys.OrderByDescending(x => x).ToList();
+            
+            foreach (int level in sortedLevels)
+            {
+                if (levelCounts[level] >= 2)
+                {
+                    foreach (BallController ball in balls)
+                    {
+                        if (ball.ballOptions.level == level)
+                        {
+                            mergeBalls.Add(ball);
+                            if (mergeBalls.Count >= 2)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (mergeBalls.Count >= 2) {
+                        break;
+                    }
+                }
+            }
+            
+            foreach (BallController ball in mergeBalls)
+            {
+                int ballLevel = ball.ballOptions.level;
+                Debug.Log("Ball Level: " + ballLevel);
+            }
+    
+            if (mergeBalls.Count < 2)
+            {
+                Debug.Log("Not enough balls found for merge.");
+            }
+    
+            return mergeBalls;
         }
     }
 }
