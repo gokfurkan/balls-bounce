@@ -43,7 +43,6 @@
 
     public enum PoolType
     {
-        Ball,
         IncomeVisual,
     }
 }

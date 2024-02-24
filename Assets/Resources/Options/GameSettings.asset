@@ -42,3 +42,7 @@ MonoBehaviour:
     levelCompletedText: LEVEL COMPLETED
     levelFailedText: LEVEL FAILED
     textFont: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  ballManagerOptions:
+    moveToMergePointDuration: 1.5
+    mergeMoveDuration: 1.25
+    afterMergeMoveUpDuration: 1.5

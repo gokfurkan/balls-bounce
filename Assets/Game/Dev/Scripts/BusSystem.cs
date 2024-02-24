@@ -19,8 +19,8 @@ namespace Game.Dev.Scripts
         public static Action OnSpawnMoneys;
         public static void CallSpawnMoneys() { OnSpawnMoneys?.Invoke(); }
         
-        public static Action <Transform> OnSpawnIncomeVisual;
-        public static void CallSpawnIncomeVisual(Transform pos) { OnSpawnIncomeVisual?.Invoke(pos); }
+        public static Action <Transform , int> OnSpawnIncomeVisual;
+        public static void CallSpawnIncomeVisual(Transform pos , int incomeAmount) { OnSpawnIncomeVisual?.Invoke(pos , incomeAmount); }
         
         //Game Manager
         
@@ -46,8 +46,8 @@ namespace Game.Dev.Scripts
         
         //Upgrades
         
-        public static Action OnAddBall;
-        public static void CallAddBall() { OnAddBall?.Invoke(); }
+        public static Action <int> OnAddNewBall;
+        public static void CallAddNewBall(int level) { OnAddNewBall?.Invoke(level); }
         
         public static Action OnMergeBall;
         public static void CallMergeBall() { OnMergeBall?.Invoke(); }

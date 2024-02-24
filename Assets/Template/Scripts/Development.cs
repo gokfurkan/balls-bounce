@@ -35,7 +35,7 @@ namespace Game.Dev.Scripts
             
             if (Input.GetKeyDown(KeyCode.P))
             {
-                BusSystem.CallAddBall();
+                BusSystem.CallAddNewBall(0);
             }
         }
 #endif

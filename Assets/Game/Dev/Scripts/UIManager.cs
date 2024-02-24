@@ -16,12 +16,12 @@ namespace Game.Dev.Scripts
             BusSystem.OnSpawnIncomeVisual -= SpawnIncomeVisual;
         }
 
-        private void SpawnIncomeVisual(Transform pos)
+        private void SpawnIncomeVisual(Transform pos , int incomeAmount)
         {
             var createdIncomeVisual = Pooling.instance.poolObjects[(int)PoolType.IncomeVisual].GetItem();
             createdIncomeVisual.transform.position = pos.position;
             createdIncomeVisual.SetActive(true);
-            createdIncomeVisual.GetComponent<IncomeVisual>().InitIncome();
+            createdIncomeVisual.GetComponent<IncomeVisual>().InitIncome(incomeAmount);
         }
     }
 }

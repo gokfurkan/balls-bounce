@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1980051862302785187}
   - component: {fileID: 320375108720304394}
   m_Layer: 8
-  m_Name: Ball
+  m_Name: Ball_V8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -195,7 +195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95e655c14798436fbdd9c75a5b22e8e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballOptions: {fileID: 11400000, guid: 6367013824d678d40ac6d7ae530ec396, type: 2}
+  ballOptions: {fileID: 11400000, guid: 188dc95a5a0a15541afce5e5838a0d42, type: 2}
+  ballCollider: {fileID: 0}
 --- !u!114 &320375108720304394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,7 +302,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1dfd1642cec7fcd468c8196002051691, type: 2}
+  - {fileID: 2100000, guid: 2299c1cc20e4741488b0c38273fb8675, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

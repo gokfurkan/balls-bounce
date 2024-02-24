@@ -1,38 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
+using Game.Dev.Scripts.Scriptables;
 using Sirenix.OdinInspector;
 using Template.Scripts;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Game.Dev.Scripts.Ball
 {
     public class BallManager : Singleton<BallManager>
     {
-        public List<BallController> balls;
+        public List<Transform> mergePoints;
+        // public List<BallOptions> ballOptions;
+        
+        [Space(10)]
+        [ReadOnly] public List<BallController> balls;
 
         [Space(10)] 
         public Transform spawnPos;
         public Transform ballHolder;
 
+        private const int needMergeAmount = 2;
+        private GameSettings gameSettings;
+        
         private void OnEnable()
         {
-            BusSystem.OnAddBall += AddBall;
+            BusSystem.OnAddNewBall += AddNewBall;
             BusSystem.OnMergeBall += MergeBall;
             BusSystem.OnReSpawnBall += ReSpawnBall;
         }
 
         private void OnDisable()
         {
-            BusSystem.OnAddBall -= AddBall;
+            BusSystem.OnAddNewBall -= AddNewBall;
             BusSystem.OnMergeBall -= MergeBall;
             BusSystem.OnReSpawnBall -= ReSpawnBall;
         }
-
-        private void AddBall()
+        
+        private void Start()
         {
-            var createdBall = Pooling.instance.poolObjects[(int)PoolType.Ball].GetItem();
+            gameSettings = InitializeManager.instance.gameSettings;
+        }
+
+        private void AddNewBall(int level)
+        {
+            var createdBall = BallPooling.instance.poolObjects[level].GetItem();
             createdBall.transform.SetParent(ballHolder , true);
 
             var createdBallController = createdBall.GetComponent<BallController>();
@@ -45,12 +57,69 @@ namespace Game.Dev.Scripts.Ball
         private void MergeBall()
         {
             List<BallController> highestBalls = FindMergeBalls();
-            if (highestBalls.Count < 2) return;
+            
+            if (highestBalls.Count < needMergeAmount) return;
            
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < needMergeAmount; i++)
             {
-                balls.Remove(highestBalls[i]);
-                Pooling.instance.poolObjects[(int)PoolType.Ball].PutItem(highestBalls[i].gameObject);
+                highestBalls[i].OnInitMerge();
+            }
+
+            int completedMoveToPointTweenCount = 0;
+
+            for (int i = 0; i < needMergeAmount; i++)
+            {
+                Tween moveTween = highestBalls[i].transform.DOMove(mergePoints[i].position, gameSettings.ballManagerOptions.moveToMergePointDuration);
+                moveTween.OnComplete(OnMoveToMergePointCompleteOnce);
+            }
+
+            void OnMoveToMergePointCompleteOnce()
+            {
+                completedMoveToPointTweenCount++;
+                if (completedMoveToPointTweenCount >= needMergeAmount)
+                {
+                    OnMoveToMergePointComplete();
+                }
+            }
+            
+            void OnMoveToMergePointComplete()
+            {
+                int completedMoveToMergeTweenCount = 0;
+
+                for (int i = 0; i < needMergeAmount; i++)
+                {
+                    Tween moveTween = highestBalls[i].transform.DOMove(mergePoints[2].position, gameSettings.ballManagerOptions.mergeMoveDuration);
+                    moveTween.OnComplete(OnMoveToMergeCompleteOnce);
+                }
+
+                void OnMoveToMergeCompleteOnce()
+                {
+                    completedMoveToMergeTweenCount++;
+                    if (completedMoveToMergeTweenCount >= needMergeAmount)
+                    {
+                        OnMoveToMergeComplete();
+                    }
+                }
+            }
+
+            void OnMoveToMergeComplete()
+            {
+                foreach (var ball in highestBalls)
+                {
+                    BallPooling.instance.poolObjects[ball.ballOptions.level].PutItem(ball.gameObject);
+                    balls.Remove(ball);
+                }
+                
+                var upgradedBall = BallPooling.instance.poolObjects[highestBalls[0].ballOptions.level + 1].GetItem();
+                var upgradedBallController = upgradedBall.GetComponent<BallController>();
+                
+                balls.Add(upgradedBallController);
+                upgradedBall.transform.SetParent(ballHolder, true);
+                upgradedBall.transform.position = mergePoints[2].position;
+                upgradedBall.gameObject.SetActive(true);
+                
+                Tween moveTween = upgradedBall.transform.DOMove(mergePoints[3].position, gameSettings.ballManagerOptions.afterMergeMoveUpDuration);
+                moveTween.OnComplete(() => SpawnBall(upgradedBall.GetComponent<BallController>()));
             }
         }
 
@@ -90,20 +159,20 @@ namespace Game.Dev.Scripts.Ball
             
             foreach (int level in sortedLevels)
             {
-                if (levelCounts[level] >= 2)
+                if (levelCounts[level] >= needMergeAmount)
                 {
                     foreach (BallController ball in balls)
                     {
                         if (ball.ballOptions.level == level)
                         {
                             mergeBalls.Add(ball);
-                            if (mergeBalls.Count >= 2)
+                            if (mergeBalls.Count >= needMergeAmount)
                             {
                                 break;
                             }
                         }
                     }
-                    if (mergeBalls.Count >= 2) {
+                    if (mergeBalls.Count >= needMergeAmount) {
                         break;
                     }
                 }
@@ -115,7 +184,7 @@ namespace Game.Dev.Scripts.Ball
                 Debug.Log("Ball Level: " + ballLevel);
             }
     
-            if (mergeBalls.Count < 2)
+            if (mergeBalls.Count < needMergeAmount)
             {
                 Debug.Log("Not enough balls found for merge.");
             }

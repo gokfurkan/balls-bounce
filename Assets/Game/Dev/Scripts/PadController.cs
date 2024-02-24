@@ -17,8 +17,9 @@ namespace Game.Dev.Scripts
 
         public void Interact(BallController ball)
         {
-            BusSystem.CallAddMoneys(ball.ballOptions.incomeAmount);
-            BusSystem.CallSpawnIncomeVisual(ball.transform);
+            var incomeAmount = ball.ballOptions.incomeAmount;
+            BusSystem.CallAddMoneys(incomeAmount);
+            BusSystem.CallSpawnIncomeVisual(ball.transform , incomeAmount);
             
             sequence = DOTween.Sequence();
             sequence.Append(meshRenderer.material.DOFloat(bendAmount, Amplitude, bendDuration));

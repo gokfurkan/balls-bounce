@@ -19,8 +19,9 @@ namespace Game.Dev.Scripts
         public float moveDuration;
         public float fadeDuration;
 
-        public void InitIncome()
+        public void InitIncome(int incomeAmount)
         {
+            text.text = "+$" + incomeAmount;
             text.DOColor(initColor, 0);
             textRect.transform.DOLocalMoveY(0, 0);
             textRect.transform.DOLocalMoveY(moveValue, moveDuration).OnComplete(() =>

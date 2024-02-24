@@ -14,6 +14,7 @@ namespace Game.Dev.Scripts.Scriptables
         public GamePlayOptions gamePlayOptions;
         public EconomyOptions economyOptions;
         public UIOptions uiOptions;
+        public BallManagerOptions ballManagerOptions;
     }
 
     [Serializable]
@@ -62,5 +63,14 @@ namespace Game.Dev.Scripts.Scriptables
 
         [Space(10)] 
         public TMP_FontAsset  textFont;
+    }
+
+    [Serializable]
+    public class BallManagerOptions
+    {
+        [Header("Merge")] 
+        public float moveToMergePointDuration;
+        public float mergeMoveDuration;
+        public float afterMergeMoveUpDuration;
     }
 }
