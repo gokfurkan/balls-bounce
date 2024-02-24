@@ -12,7 +12,7 @@ namespace Template.Scripts
         {
             base.Initialize();
             
-            bool currentSoundState = SaveManager.instance.saveData.GetSound();
+            bool currentSoundState = SaveManager.instance.saveData.sound;
             AudioListener.volume = currentSoundState ? 1 : 0;
             
             //test

@@ -8,7 +8,7 @@ namespace Template.Scripts
         {
             base.Initialize();
             
-            bool currentHapticState = SaveManager.instance.saveData.GetHaptic();
+            bool currentHapticState = SaveManager.instance.saveData.haptic;
             MoreMountains.NiceVibrations.MMVibrationManager.SetHapticsActive(currentHapticState);
         }
 

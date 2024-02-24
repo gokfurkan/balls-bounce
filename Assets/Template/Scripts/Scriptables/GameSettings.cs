@@ -15,6 +15,7 @@ namespace Game.Dev.Scripts.Scriptables
         public EconomyOptions economyOptions;
         public UIOptions uiOptions;
         public BallManagerOptions ballManagerOptions;
+        public UpgradeOptions upgradeOptions;
     }
 
     [Serializable]
@@ -72,5 +73,57 @@ namespace Game.Dev.Scripts.Scriptables
         public float moveToMergePointDuration;
         public float mergeMoveDuration;
         public float afterMergeMoveUpDuration;
+    }
+
+    [Serializable]
+    public class UpgradeOptions
+    {
+        public bool IsActive;
+        public bool IsChangeableActive;
+
+        [Header("Upgrade Button Curve Values")] 
+        
+        [Space(5)]
+
+        [ShowIf("IsChangeableActive")]
+        public int BoostCostTime = 3;
+        [ShowIf("IsChangeableActive")]
+        public float BoostCostValue = 150;
+        // [ShowIf("IsChangeableActive")]
+        // public int BoostWhatWeGetTime = 3;
+        // [ShowIf("IsChangeableActive")]
+        // public float BoostWhatWeGetValue = 3;
+
+        
+        [Space(5)]
+
+        [ShowIf("IsChangeableActive")]
+        public int PowerCostTime = 3;
+        [ShowIf("IsChangeableActive")]
+        public float PowerCostValue = 150;
+        // [ShowIf("IsChangeableActive")]
+        // public int PowerWhatWeGetTime = 3;
+        // [ShowIf("IsChangeableActive")]
+        // public float PowerWhatWeGetValue = 3;
+        
+        [Space(5)]
+
+        [ShowIf("IsChangeableActive")]
+        public int IncomeCostTime = 3;
+        [ShowIf("IsChangeableActive")]
+        public float IncomeCostValue = 150;
+        // [ShowIf("IsChangeableActive")]
+        // public int IncomeWhatWeGetTime = 3;
+        // [ShowIf("IsChangeableActive")]
+        // public float IncomeWhatWeGetValue = 3;
+    
+        
+        [Header("Texts")]
+        public string MaxText = "MAX ";
+        public string LevelText = "Lvl. ";
+        public string CostText = " $";
+
+        [Space(5)]
+        public int TutorialGetMoney = 117;
     }
 }

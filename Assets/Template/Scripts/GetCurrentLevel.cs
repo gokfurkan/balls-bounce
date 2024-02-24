@@ -19,7 +19,7 @@ namespace Template.Scripts
             TextMeshProUGUI text = GetComponent<TextMeshProUGUI>();
             
             UIOptions uiOptions = InitializeManager.instance.gameSettings.uiOptions;
-            string levelNumber = " " + (SaveManager.instance.saveData.GetLevel() + (textType != LevelTextType.LevelCompleted ? 1 : 0));
+            string levelNumber = " " + (SaveManager.instance.saveData.level + (textType != LevelTextType.LevelCompleted ? 1 : 0));
             
             string levelText = uiOptions.levelText;
             string completedText = uiOptions.levelCompletedText;

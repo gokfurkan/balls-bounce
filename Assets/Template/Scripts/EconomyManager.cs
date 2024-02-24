@@ -37,7 +37,7 @@ namespace Template.Scripts
         
         private void AddMoneys(int amount)
         {
-            var oldAmount =  SaveManager.instance.saveData.GetMoneys();
+            var oldAmount =  SaveManager.instance.saveData.moneys;
             var newAmount = oldAmount + amount;
 
             oldMoneyTarget = oldAmount;
@@ -61,7 +61,7 @@ namespace Template.Scripts
             if (oldMoneyTarget == 0 || newMoneyTarget == 0)
             {
                 oldMoneyTarget = 0;
-                newMoneyTarget = SaveManager.instance.saveData.GetMoneys();
+                newMoneyTarget = SaveManager.instance.saveData.moneys;
             }
             
             if (InitializeManager.instance.gameSettings.economyOptions.useMoneyAnimation)
@@ -73,7 +73,7 @@ namespace Template.Scripts
                 moneyText.text = MoneyCalculator.NumberToStringFormatter(newMoneyTarget);
             }
             
-            // BusSystem.CallRefreshUpgradeValues();
+            BusSystem.CallRefreshUpgradeValues();
         }
         
         private void SpawnMoneys()

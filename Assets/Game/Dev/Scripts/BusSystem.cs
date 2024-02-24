@@ -46,6 +46,9 @@ namespace Game.Dev.Scripts
         
         //Upgrades
         
+        public static Action OnRefreshUpgradeValues;
+        public static void CallRefreshUpgradeValues() { OnRefreshUpgradeValues?.Invoke(); }
+        
         public static Action <int> OnAddNewBall;
         public static void CallAddNewBall(int level) { OnAddNewBall?.Invoke(level); }
         

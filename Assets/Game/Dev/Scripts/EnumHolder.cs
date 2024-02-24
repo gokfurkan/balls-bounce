@@ -17,6 +17,7 @@
         Money, 
         Restart,
         EndContinue,
+        Upgrade,
     }
 
     public enum LevelTextType
@@ -44,5 +45,12 @@
     public enum PoolType
     {
         IncomeVisual,
+    }
+
+    public enum UpgradeType
+    {
+        Pad,
+        AddBall,
+        MergeBall,
     }
 }

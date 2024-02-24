@@ -35,7 +35,7 @@ namespace Template.Scripts
             
             int delta = 0;
             
-            if (SaveManager.instance.saveData.GetLevel() >= tutorialLevels)
+            if (SaveManager.instance.saveData.level >= tutorialLevels)
             {
                 for (int j = 0; j < tutorialLevels; j++)
                 {
@@ -44,7 +44,7 @@ namespace Template.Scripts
                 delta = tutorialLevels;
             }
             
-            int levelIndex = (SaveManager.instance.saveData.GetLevel() - delta) % levelListCache.Count;
+            int levelIndex = (SaveManager.instance.saveData.level - delta) % levelListCache.Count;
             loadedLevel = Instantiate(levelListCache[levelIndex], playZone, true);
         }
     }

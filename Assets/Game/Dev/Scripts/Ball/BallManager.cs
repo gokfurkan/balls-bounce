@@ -20,7 +20,7 @@ namespace Game.Dev.Scripts.Ball
         public Transform spawnPos;
         public Transform ballHolder;
 
-        private const int needMergeAmount = 2;
+        private const int NEED_MERGE_AMOUNT = 2;
         private GameSettings gameSettings;
         
         private void OnEnable()
@@ -58,16 +58,16 @@ namespace Game.Dev.Scripts.Ball
         {
             List<BallController> highestBalls = FindMergeBalls();
             
-            if (highestBalls.Count < needMergeAmount) return;
+            if (highestBalls.Count < NEED_MERGE_AMOUNT) return;
            
-            for (int i = 0; i < needMergeAmount; i++)
+            for (int i = 0; i < NEED_MERGE_AMOUNT; i++)
             {
                 highestBalls[i].OnInitMerge();
             }
 
             int completedMoveToPointTweenCount = 0;
 
-            for (int i = 0; i < needMergeAmount; i++)
+            for (int i = 0; i < NEED_MERGE_AMOUNT; i++)
             {
                 Tween moveTween = highestBalls[i].transform.DOMove(mergePoints[i].position, gameSettings.ballManagerOptions.moveToMergePointDuration);
                 moveTween.OnComplete(OnMoveToMergePointCompleteOnce);
@@ -76,7 +76,7 @@ namespace Game.Dev.Scripts.Ball
             void OnMoveToMergePointCompleteOnce()
             {
                 completedMoveToPointTweenCount++;
-                if (completedMoveToPointTweenCount >= needMergeAmount)
+                if (completedMoveToPointTweenCount >= NEED_MERGE_AMOUNT)
                 {
                     OnMoveToMergePointComplete();
                 }
@@ -86,7 +86,7 @@ namespace Game.Dev.Scripts.Ball
             {
                 int completedMoveToMergeTweenCount = 0;
 
-                for (int i = 0; i < needMergeAmount; i++)
+                for (int i = 0; i < NEED_MERGE_AMOUNT; i++)
                 {
                     Tween moveTween = highestBalls[i].transform.DOMove(mergePoints[2].position, gameSettings.ballManagerOptions.mergeMoveDuration);
                     moveTween.OnComplete(OnMoveToMergeCompleteOnce);
@@ -95,7 +95,7 @@ namespace Game.Dev.Scripts.Ball
                 void OnMoveToMergeCompleteOnce()
                 {
                     completedMoveToMergeTweenCount++;
-                    if (completedMoveToMergeTweenCount >= needMergeAmount)
+                    if (completedMoveToMergeTweenCount >= NEED_MERGE_AMOUNT)
                     {
                         OnMoveToMergeComplete();
                     }
@@ -159,20 +159,20 @@ namespace Game.Dev.Scripts.Ball
             
             foreach (int level in sortedLevels)
             {
-                if (levelCounts[level] >= needMergeAmount)
+                if (levelCounts[level] >= NEED_MERGE_AMOUNT)
                 {
                     foreach (BallController ball in balls)
                     {
                         if (ball.ballOptions.level == level)
                         {
                             mergeBalls.Add(ball);
-                            if (mergeBalls.Count >= needMergeAmount)
+                            if (mergeBalls.Count >= NEED_MERGE_AMOUNT)
                             {
                                 break;
                             }
                         }
                     }
-                    if (mergeBalls.Count >= needMergeAmount) {
+                    if (mergeBalls.Count >= NEED_MERGE_AMOUNT) {
                         break;
                     }
                 }
@@ -184,7 +184,7 @@ namespace Game.Dev.Scripts.Ball
                 Debug.Log("Ball Level: " + ballLevel);
             }
     
-            if (mergeBalls.Count < needMergeAmount)
+            if (mergeBalls.Count < NEED_MERGE_AMOUNT)
             {
                 Debug.Log("Not enough balls found for merge.");
             }

@@ -21,7 +21,7 @@ namespace Template.Scripts
 
         public void ToggleSound()
         {
-            bool currentSoundState = SaveManager.instance.saveData.GetSound();
+            bool currentSoundState = SaveManager.instance.saveData.sound;
     
             soundOn.SetActive(!currentSoundState);
             soundOff.SetActive(currentSoundState);
@@ -34,7 +34,7 @@ namespace Template.Scripts
 
         public void ToggleHaptic()
         {
-            bool currentHapticState = SaveManager.instance.saveData.GetHaptic();
+            bool currentHapticState = SaveManager.instance.saveData.haptic;
     
             hapticOn.SetActive(!currentHapticState);
             hapticOff.SetActive(currentHapticState);
@@ -47,8 +47,8 @@ namespace Template.Scripts
 
         private void InitSettings()
         {
-            bool currentSoundState = SaveManager.instance.saveData.GetSound();
-            bool currentHapticState = SaveManager.instance.saveData.GetHaptic();
+            bool currentSoundState = SaveManager.instance.saveData.sound;
+            bool currentHapticState = SaveManager.instance.saveData.haptic;
 
             SetActiveState(soundOn, soundOff, currentSoundState);
             SetActiveState(hapticOn, hapticOff, currentHapticState);

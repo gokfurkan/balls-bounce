@@ -11,27 +11,14 @@ namespace Game.Dev.Scripts
 
         public bool sound;
         public bool haptic;
+
+        //Upgrade
+        public int minBallLevel = 0;
+        public int havePadAmount = 1;
+
+        public int padUpgradeLevel;
+        public int addBallUpgradeLevel;
+        public int mergeBallUpgradeBall;
         
-
-        //Get
-        public int GetLevel()
-        {
-            return level;
-        }
-
-        public int GetMoneys()
-        {
-            return moneys;
-        }
-
-        public bool GetSound()
-        {
-            return sound;
-        }
-
-        public bool GetHaptic()
-        {
-            return haptic;
-        }
     }
 }
