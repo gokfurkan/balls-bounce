@@ -19,6 +19,7 @@ namespace Game.Dev.Scripts
         [Space(10)] 
         public Transform spawnPos;
         public Transform ballHolder;
+        public ParticleSystem mergeParticle;
 
         private const int NEED_MERGE_AMOUNT = 2;
         private GameSettings gameSettings;
@@ -116,6 +117,8 @@ namespace Game.Dev.Scripts
                 {
                     BallPooling.instance.poolObjects[ball.ballOptions.level].PutItem(ball.gameObject);
                 }
+                
+                mergeParticle.Play();
                 
                 var upgradedBall = BallPooling.instance.poolObjects[highestBalls[0].ballOptions.level + 1].GetItem();
                 var upgradedBallController = upgradedBall.GetComponent<BallController>();
