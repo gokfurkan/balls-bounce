@@ -28,7 +28,7 @@ namespace Game.Dev.Scripts
             BusSystem.OnRefreshUpgradeValues -= Refresh;
         }
 
-        private void Start()
+        private void Awake()
         {
             upgradeSettings = InitializeManager.instance.gameSettings.upgradeOptions;
         }
@@ -53,7 +53,7 @@ namespace Game.Dev.Scripts
         {
             switch (upgradeType)
             {
-                case UpgradeType.Pad:
+                case UpgradeType.AddPad:
                     UpgradeManager.instance.AddPad();
                     break;
                 case UpgradeType.AddBall:
@@ -76,13 +76,13 @@ namespace Game.Dev.Scripts
         {
             if (!IsMaxLevel() && HaveMoney())
             {
-                activeButton.SetActive(false);
-                deActiveButton.SetActive(true);
+                activeButton.SetActive(true);
+                deActiveButton.SetActive(false);
             }
             else
             {
-                activeButton.SetActive(true);
-                deActiveButton.SetActive(false);
+                activeButton.SetActive(false);
+                deActiveButton.SetActive(true);
             }
         }
 
@@ -92,14 +92,14 @@ namespace Game.Dev.Scripts
             {
                 foreach (var text in costTexts)
                 {
-                    text.text = upgradeSettings.MaxText;
+                    text.text = upgradeSettings.maxText;
                 }
             }
             else
             {
-                foreach (var t in costTexts)
+                foreach (var text in costTexts)
                 {
-                    t.text = MoneyCalculator.NumberToStringFormatter(GetCostAmount()) + upgradeSettings.CostText;
+                    text.text = MoneyCalculator.NumberToStringFormatter(GetCostAmount()) + upgradeSettings.costText;
                 }
             }
         }
@@ -109,7 +109,7 @@ namespace Game.Dev.Scripts
             var saveData = SaveManager.instance.saveData;
             var upgradeLevel = upgradeType switch
             {
-                UpgradeType.Pad => saveData.padUpgradeLevel,
+                UpgradeType.AddPad => saveData.padUpgradeLevel,
                 UpgradeType.AddBall => saveData.addBallUpgradeLevel,
                 UpgradeType.MergeBall => saveData.mergeBallUpgradeBall,
                 _ => 0
@@ -123,7 +123,7 @@ namespace Game.Dev.Scripts
             var saveData = SaveManager.instance.saveData;
             switch (upgradeType)
             {
-                case UpgradeType.Pad:
+                case UpgradeType.AddPad:
                     saveData.padUpgradeLevel++;
                     break;
                 case UpgradeType.AddBall:
@@ -141,7 +141,7 @@ namespace Game.Dev.Scripts
 
             switch (upgradeType)
             {
-                case UpgradeType.Pad:
+                case UpgradeType.AddPad:
                     isMaxLevel = !PadManager.instance.CanUpgrade();
                     break;
                 case UpgradeType.AddBall:

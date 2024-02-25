@@ -49,7 +49,7 @@
 
     public enum UpgradeType
     {
-        Pad,
+        AddPad,
         AddBall,
         MergeBall,
     }

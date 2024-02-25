@@ -8,7 +8,7 @@ namespace Game.Dev
     {
         public Transform padHolder;
 
-        private void Start()
+        private void Awake()
         {
             PadManager.instance.InitPads(padHolder);
         }

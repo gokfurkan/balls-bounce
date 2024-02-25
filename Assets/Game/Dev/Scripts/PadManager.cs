@@ -33,7 +33,7 @@ namespace Game.Dev.Scripts
 
         public bool CanUpgrade()
         {
-            return !(SaveManager.instance.saveData.havePadAmount >= pads.Count);
+            return !(SaveManager.instance.saveData.havePadAmount >= totalPadAmount);
         }
     }
 }
