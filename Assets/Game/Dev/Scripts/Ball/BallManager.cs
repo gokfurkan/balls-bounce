@@ -51,6 +51,7 @@ namespace Game.Dev.Scripts.Ball
             balls.Add(createdBallController);
             
             SpawnBall(createdBallController);
+            BusSystem.CallRefreshUpgradeValues();
         }
 
         [Button]
@@ -58,7 +59,14 @@ namespace Game.Dev.Scripts.Ball
         {
             List<BallController> highestBalls = FindMergeBalls();
             
-            if (highestBalls.Count < NEED_MERGE_AMOUNT) return;
+            if (!CanMerge()) return;
+            
+            foreach (var ball in highestBalls)
+            {
+                balls.Remove(ball);
+            }
+            
+            BusSystem.CallRefreshUpgradeValues();
            
             for (int i = 0; i < NEED_MERGE_AMOUNT; i++)
             {
@@ -107,7 +115,6 @@ namespace Game.Dev.Scripts.Ball
                 foreach (var ball in highestBalls)
                 {
                     BallPooling.instance.poolObjects[ball.ballOptions.level].PutItem(ball.gameObject);
-                    balls.Remove(ball);
                 }
                 
                 var upgradedBall = BallPooling.instance.poolObjects[highestBalls[0].ballOptions.level + 1].GetItem();
@@ -181,7 +188,6 @@ namespace Game.Dev.Scripts.Ball
             foreach (BallController ball in mergeBalls)
             {
                 int ballLevel = ball.ballOptions.level;
-                Debug.Log("Ball Level: " + ballLevel);
             }
     
             if (mergeBalls.Count < NEED_MERGE_AMOUNT)
@@ -190,6 +196,11 @@ namespace Game.Dev.Scripts.Ball
             }
     
             return mergeBalls;
+        }
+
+        public bool CanMerge()
+        {
+            return FindMergeBalls().Count == NEED_MERGE_AMOUNT;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Game.Dev.Scripts.Scriptables;
+﻿using System.Collections;
+using Game.Dev.Scripts.Ball;
+using Game.Dev.Scripts.Scriptables;
 using Template.Scripts;
 using TMPro;
 using UnityEngine;
@@ -15,7 +17,8 @@ namespace Game.Dev.Scripts
         
         [Space(10)]
         [SerializeField] private TextMeshProUGUI[] costTexts;
-        
+
+        private bool canUpgrade = true;
         private UpgradeOptions upgradeSettings;
         
         private void OnEnable()
@@ -35,6 +38,11 @@ namespace Game.Dev.Scripts
 
         public void Upgrade()
         {
+            if (!canUpgrade)
+            {
+                return;
+            }
+            
             if (!HaveMoney())
             {
                 return;
@@ -46,6 +54,7 @@ namespace Game.Dev.Scripts
             }
             
             OnUpgrade();
+            StartCoroutine(ReEnableButtonDelay());
             BusSystem.CallAddMoneys(-GetCostAmount());
         }
 
@@ -74,16 +83,11 @@ namespace Game.Dev.Scripts
 
         private void ControlButtonEnabled()
         {
-            if (!IsMaxLevel() && HaveMoney())
-            {
-                activeButton.SetActive(true);
-                deActiveButton.SetActive(false);
-            }
-            else
-            {
-                activeButton.SetActive(false);
-                deActiveButton.SetActive(true);
-            }
+            bool canInteract = !IsMaxLevel() && HaveMoney();
+            bool canActivate = upgradeType != UpgradeType.MergeBall || BallManager.instance.CanMerge();
+
+            activeButton.SetActive(canInteract && canActivate);
+            deActiveButton.SetActive(!canInteract || !canActivate);
         }
 
         private void SetUpgradeTexts()
@@ -161,6 +165,13 @@ namespace Game.Dev.Scripts
         private bool HaveMoney()
         {
             return SaveManager.instance.saveData.moneys >= GetCostAmount();
+        }
+
+        private IEnumerator ReEnableButtonDelay()
+        {
+            canUpgrade = false;
+            yield return new WaitForSeconds(0.5f);
+            canUpgrade = true;
         }
     }
 }

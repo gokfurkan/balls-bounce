@@ -581,6 +581,7 @@ MonoBehaviour:
   upgradeType: 0
   activeButton: {fileID: 7267459336228729512}
   deActiveButton: {fileID: 7267459334854102701}
+  buttonClick: {fileID: 7267459336228729523}
   costTexts:
   - {fileID: 7267459336102043298}
   - {fileID: 7267459335775362337}

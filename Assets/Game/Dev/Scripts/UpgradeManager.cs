@@ -21,6 +21,7 @@ namespace Game.Dev.Scripts
             SaveManager.instance.Save();
             
             PadManager.instance.ActivatePads();
+            BusSystem.CallRefreshUpgradeValues();
         }
         
         #endregion
