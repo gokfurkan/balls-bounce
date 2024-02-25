@@ -18,6 +18,8 @@ namespace Game.Dev.Scripts
         public void Interact(BallController ball)
         {
             var incomeAmount = ball.ballOptions.incomeAmount;
+
+            Debug.Log("VAR");
             BusSystem.CallAddMoneys(incomeAmount);
             BusSystem.CallSpawnIncomeVisual(ball.transform , incomeAmount);
             

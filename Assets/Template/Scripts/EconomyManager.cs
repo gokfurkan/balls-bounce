@@ -42,8 +42,13 @@ namespace Template.Scripts
 
             oldMoneyTarget = oldAmount;
             newMoneyTarget = newAmount;
-            
+
             SaveManager.instance.saveData.moneys = newAmount;
+            
+            if (amount > 0)
+            {
+                SaveManager.instance.saveData.totalEarnedMoneys += amount;
+            }
 
             SetMoneyText();
         }

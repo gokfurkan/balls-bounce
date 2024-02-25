@@ -20,6 +20,7 @@ namespace Game.Dev.Scripts
             totalPadAmount = pads.Count;
 
             ActivatePads();
+            BusSystem.CallRefreshUpgradeValues();
         }
         
         public void ActivatePads()

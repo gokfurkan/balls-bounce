@@ -9,6 +9,7 @@ namespace Game.Dev.Scripts
         //Set
         public int level;
         public int moneys = 10;
+        public int totalEarnedMoneys;
 
         [Space(10)]
         public bool sound;

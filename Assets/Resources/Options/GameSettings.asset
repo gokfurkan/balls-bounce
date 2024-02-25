@@ -41,7 +41,7 @@ MonoBehaviour:
     hasEndPanelLevel: 0
     levelCompletedText: LEVEL COMPLETED
     levelFailedText: LEVEL FAILED
-    textFont: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+    textFont: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
   ballManagerOptions:
     moveToMergePointDuration: 1.5
     mergeMoveDuration: 1.25

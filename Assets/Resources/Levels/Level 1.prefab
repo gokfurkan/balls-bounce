@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   padHolder: {fileID: 7230552413967298930}
+  targetProgress: 100000
 --- !u!1 &4841885943528851080
 GameObject:
   m_ObjectHideFlags: 0

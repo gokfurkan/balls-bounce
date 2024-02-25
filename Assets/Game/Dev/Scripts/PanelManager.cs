@@ -43,6 +43,7 @@ namespace Game.Dev.Scripts
             Activate(PanelType.Level);
             Activate(PanelType.OpenSettings);
             Activate(PanelType.Upgrade);
+            Activate(PanelType.LevelProgress);
             // Activate(PanelType.Restart);
         }
 

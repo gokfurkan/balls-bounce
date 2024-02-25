@@ -18,6 +18,7 @@
         Restart,
         EndContinue,
         Upgrade,
+        LevelProgress,
     }
 
     public enum LevelTextType
