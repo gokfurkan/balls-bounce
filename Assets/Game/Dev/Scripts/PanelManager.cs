@@ -71,8 +71,8 @@ namespace Game.Dev.Scripts
                 
                 Activate(PanelType.Win);
                 
-                BusSystem.CallAddMoneys(InitializeManager.instance.gameSettings.economyOptions.winIncome);
-                BusSystem.CallSpawnMoneys();
+                // BusSystem.CallAddMoneys(InitializeManager.instance.gameSettings.economyOptions.winIncome);
+                // BusSystem.CallSpawnMoneys();
             }
             else
             {
@@ -80,7 +80,7 @@ namespace Game.Dev.Scripts
                 
                 Activate(PanelType.Lose);
                 
-                BusSystem.CallAddMoneys(InitializeManager.instance.gameSettings.economyOptions.loseIncome);
+                // BusSystem.CallAddMoneys(InitializeManager.instance.gameSettings.economyOptions.loseIncome);
             }
             
             yield return new WaitForSeconds(InitializeManager.instance.gameSettings.uiOptions.endContinueDelay);

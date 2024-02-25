@@ -29,8 +29,8 @@ MonoBehaviour:
     targetFPS: 60
   economyOptions:
     useMoneyAnimation: 1
-    moneyAnimationDuration: 0
-    winIncome: 50
+    moneyAnimationDuration: 0.5
+    winIncome: 0
     loseIncome: 0
     spawnMoneyAmount: 8
   uiOptions:
@@ -47,5 +47,7 @@ MonoBehaviour:
     mergeMoveDuration: 1.25
     afterMergeMoveUpDuration: 1.5
   upgradeOptions:
+    costValueMod: 3
+    costMultiplier: 2
     maxText: 'MAX '
     costText: '$ '

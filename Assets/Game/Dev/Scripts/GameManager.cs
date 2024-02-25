@@ -58,8 +58,15 @@ namespace Game.Dev.Scripts
             
             if (win)
             {
+                for (int i = 0; i < BallPooling.instance.poolObjects.Length; i++)
+                {
+                    BallPooling.instance.poolObjects[i].PutAll();
+                }
+                
+                SaveManager.instance.saveData.OnNewLevel();
                 SaveManager.instance.saveData.level++;
                 SaveManager.instance.Save();
+                
                 gameStatus.hasLevelWin = true;
             }
             else

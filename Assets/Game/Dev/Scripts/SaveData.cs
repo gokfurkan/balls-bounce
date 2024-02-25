@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Dev.Scripts
@@ -22,7 +23,7 @@ namespace Game.Dev.Scripts
 
         [Space(10)]
         public int addPadStartCost = 700;
-        public int addBallStartCost = 5;
+        public int addBallStartCost = 10;
         public int mergeBallStartCost = 10;
 
         [Space(5)]
@@ -34,5 +35,25 @@ namespace Game.Dev.Scripts
         public int addPadCostIncrease = 1400;
         public int addBallCostIncrease = 10;
         public int mergeBallCostIncrease = 20;
+
+        [Space(5)]
+        public List<int> haveBallLevels = new List<int>();
+
+        public void OnNewLevel()
+        {
+            moneys = 10;
+            totalEarnedMoneys = 0;
+            havePadAmount = 1;
+            addPadStartCost = 700;
+            addBallStartCost = 10;
+            mergeBallStartCost = 10;
+            addPadUpgradeLevel = 0;
+            addBallUpgradeLevel = 0;
+            mergeBallUpgradeLevel = 0;
+            addPadCostIncrease = 1400;
+            addBallCostIncrease = 10;
+            mergeBallCostIncrease = 20;
+            haveBallLevels = new List<int>();
+        }
     }
 }

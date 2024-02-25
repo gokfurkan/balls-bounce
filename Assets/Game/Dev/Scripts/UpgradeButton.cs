@@ -53,10 +53,12 @@ namespace Game.Dev.Scripts
                 return;
             }
             
+            BusSystem.CallAddMoneys(-GetCostAmount());
+            
             OnUpgrade();
             StartCoroutine(ReEnableButtonDelay());
             IncreaseUpgradeLevel();
-            BusSystem.CallAddMoneys(-GetCostAmount());
+            Refresh();
         }
 
         private void OnUpgrade()
@@ -115,12 +117,24 @@ namespace Game.Dev.Scripts
             {
                 case UpgradeType.AddPad:
                     saveData.addPadUpgradeLevel++;
+                    if (saveData.addPadUpgradeLevel % upgradeSettings.costValueMod == 0)
+                    {
+                        saveData.addPadCostIncrease *= upgradeSettings.costMultiplier;
+                    }
                     break;
                 case UpgradeType.AddBall:
                     saveData.addBallUpgradeLevel++;
+                    if (saveData.addBallUpgradeLevel % upgradeSettings.costValueMod == 0)
+                    {
+                        saveData.addBallCostIncrease *= upgradeSettings.costMultiplier;
+                    }
                     break;
                 case UpgradeType.MergeBall:
                     saveData.mergeBallUpgradeLevel++;
+                    if (saveData.mergeBallUpgradeLevel % upgradeSettings.costValueMod == 0)
+                    {
+                        saveData.mergeBallCostIncrease *= upgradeSettings.costMultiplier;
+                    }
                     break;
             }
         }

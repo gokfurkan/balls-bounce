@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using Game.Dev.Scripts.Scriptables;
@@ -41,6 +42,7 @@ namespace Game.Dev.Scripts
         private void Start()
         {
             gameSettings = InitializeManager.instance.gameSettings;
+            StartCoroutine(InitHaveBalls());
         }
 
         private void AddNewBall(int level)
@@ -50,6 +52,7 @@ namespace Game.Dev.Scripts
 
             var createdBallController = createdBall.GetComponent<BallController>();
             balls.Add(createdBallController);
+            SetHaveBallLevelList();
             
             SpawnBall(createdBallController);
             BusSystem.CallRefreshUpgradeValues();
@@ -127,6 +130,8 @@ namespace Game.Dev.Scripts
                 upgradedBall.transform.SetParent(ballHolder, true);
                 upgradedBall.transform.position = mergePoints[2].position;
                 upgradedBall.gameObject.SetActive(true);
+
+                SetHaveBallLevelList();
                 
                 Tween moveTween = upgradedBall.transform.DOMove(mergePoints[3].position, gameSettings.ballManagerOptions.afterMergeMoveUpDuration);
                 moveTween.OnComplete(() => SpawnBall(upgradedBall.GetComponent<BallController>()));
@@ -147,6 +152,17 @@ namespace Game.Dev.Scripts
             ball.transform.position = spawnPos.position;
             ball.gameObject.SetActive(true);
             ball.InitBall();
+        }
+
+        private IEnumerator InitHaveBalls()
+        {
+            List<int> haveBallList = SaveManager.instance.saveData.haveBallLevels;
+
+            for (int i = 0; i < haveBallList.Count; i++)
+            {
+                AddNewBall(haveBallList[i]);
+                yield return new WaitForSeconds(0.35f);
+            }
         }
         
         private List<BallController> FindMergeBalls()
@@ -195,7 +211,7 @@ namespace Game.Dev.Scripts
     
             if (mergeBalls.Count < NEED_MERGE_AMOUNT)
             {
-                Debug.Log("Not enough balls found for merge.");
+                // Debug.Log("Not enough balls found for merge.");
             }
     
             return mergeBalls;
@@ -204,6 +220,15 @@ namespace Game.Dev.Scripts
         public bool CanMerge()
         {
             return FindMergeBalls().Count == NEED_MERGE_AMOUNT;
+        }
+
+        private void SetHaveBallLevelList()
+        {
+            SaveManager.instance.saveData.haveBallLevels.Clear();
+            for (int i = 0; i < balls.Count; i++)
+            {
+                SaveManager.instance.saveData.haveBallLevels.Add(balls[i].ballOptions.level);
+            }
         }
     }
 }

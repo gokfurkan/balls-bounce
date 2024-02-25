@@ -30,7 +30,7 @@ namespace Game.Dev.Scripts
             
             if (Input.GetKeyDown(KeyCode.M))
             {
-                BusSystem.CallAddMoneys(1000);
+                BusSystem.CallAddMoneys(50000);
             }
             
             if (Input.GetKeyDown(KeyCode.P))
