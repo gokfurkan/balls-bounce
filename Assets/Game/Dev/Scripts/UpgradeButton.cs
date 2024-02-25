@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using Game.Dev.Scripts.Ball;
 using Game.Dev.Scripts.Scriptables;
 using Template.Scripts;
 using TMPro;
@@ -159,7 +158,7 @@ namespace Game.Dev.Scripts
 
         private int GetCostAmount()
         {
-            return 100;
+            return 10;
         }
         
         private bool HaveMoney()

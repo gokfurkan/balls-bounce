@@ -1,6 +1,4 @@
-﻿using Game.Dev.Scripts.Ball;
-
-namespace Game.Dev.Scripts
+﻿namespace Game.Dev.Scripts.Interfaces
 {
     public interface Interacteable
     {

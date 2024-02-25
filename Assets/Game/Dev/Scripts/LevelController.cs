@@ -1,8 +1,6 @@
-﻿using System;
-using Game.Dev.Scripts;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Game.Dev
+namespace Game.Dev.Scripts
 {
     public class LevelController : MonoBehaviour
     {

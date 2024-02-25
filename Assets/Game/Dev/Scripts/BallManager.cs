@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 using Template.Scripts;
 using UnityEngine;
 
-namespace Game.Dev.Scripts.Ball
+namespace Game.Dev.Scripts
 {
     public class BallManager : Singleton<BallManager>
     {

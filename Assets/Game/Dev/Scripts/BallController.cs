@@ -3,7 +3,7 @@ using Template.Scripts;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Game.Dev.Scripts.Ball
+namespace Game.Dev.Scripts
 {
     public class BallController : MonoBehaviour
     {

@@ -7,7 +7,7 @@ namespace Game.Dev.Scripts
     {
         //Set
         public int level;
-        public int moneys;
+        public int moneys = 10;
 
         public bool sound;
         public bool haptic;

@@ -1,5 +1,4 @@
 ﻿using System;
-using Game.Dev.Scripts.Ball;
 using UnityEngine;
 
 namespace Game.Dev.Scripts

@@ -1,4 +1,4 @@
-﻿using Game.Dev.Scripts.Ball;
+﻿using Game.Dev.Scripts.Interfaces;
 using UnityEngine;
 
 namespace Game.Dev.Scripts
