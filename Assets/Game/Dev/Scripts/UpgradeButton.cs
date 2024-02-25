@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Game.Dev.Scripts.Scriptables;
 using Template.Scripts;
 using TMPro;
@@ -54,6 +55,7 @@ namespace Game.Dev.Scripts
             
             OnUpgrade();
             StartCoroutine(ReEnableButtonDelay());
+            IncreaseUpgradeLevel();
             BusSystem.CallAddMoneys(-GetCostAmount());
         }
 
@@ -77,7 +79,6 @@ namespace Game.Dev.Scripts
         {
             SetUpgradeTexts();
             ControlButtonEnabled();
-            IncreaseUpgradeLevel();
         }
 
         private void ControlButtonEnabled()
@@ -106,20 +107,6 @@ namespace Game.Dev.Scripts
                 }
             }
         }
-        
-        private int GetUpgradeLevel()
-        {
-            var saveData = SaveManager.instance.saveData;
-            var upgradeLevel = upgradeType switch
-            {
-                UpgradeType.AddPad => saveData.padUpgradeLevel,
-                UpgradeType.AddBall => saveData.addBallUpgradeLevel,
-                UpgradeType.MergeBall => saveData.mergeBallUpgradeBall,
-                _ => 0
-            };
-        
-            return upgradeLevel;
-        }
 
         private void IncreaseUpgradeLevel()
         {
@@ -127,13 +114,13 @@ namespace Game.Dev.Scripts
             switch (upgradeType)
             {
                 case UpgradeType.AddPad:
-                    saveData.padUpgradeLevel++;
+                    saveData.addPadUpgradeLevel++;
                     break;
                 case UpgradeType.AddBall:
                     saveData.addBallUpgradeLevel++;
                     break;
                 case UpgradeType.MergeBall:
-                    saveData.mergeBallUpgradeBall++;
+                    saveData.mergeBallUpgradeLevel++;
                     break;
             }
         }
@@ -158,7 +145,23 @@ namespace Game.Dev.Scripts
 
         private int GetCostAmount()
         {
-            return 10;
+            int costAmount = 0;
+            SaveData saveData = SaveManager.instance.saveData;
+            
+            switch (upgradeType)
+            {
+                case UpgradeType.AddPad:
+                    costAmount = saveData.addPadStartCost + (saveData.addPadUpgradeLevel * saveData.addPadCostIncrease);
+                    break;
+                case UpgradeType.AddBall:
+                    costAmount = saveData.addBallStartCost + (saveData.addBallUpgradeLevel * saveData.addBallCostIncrease);
+                    break;
+                case UpgradeType.MergeBall:
+                    costAmount = saveData.mergeBallStartCost + (saveData.mergeBallUpgradeLevel * saveData.mergeBallCostIncrease);
+                    break;
+            }
+
+            return costAmount;
         }
         
         private bool HaveMoney()
