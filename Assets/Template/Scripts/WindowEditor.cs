@@ -1,5 +1,6 @@
 ﻿using UnityEditor;
 #if UNITY_EDITOR
+using System.IO;
 using UnityEditor.SceneManagement;
 #endif
 using UnityEngine;
@@ -12,7 +13,20 @@ namespace Template.Scripts
         [MenuItem("Template/Save/Delete")]
         private static void DeleteSave()
         {
-            SaveManager.instance.Delete();
+            if (File.Exists(GetSavePath()))
+            {
+                File.Delete(GetSavePath());
+                Debug.Log("Save data deleted!");
+            }
+            else
+            {
+                Debug.Log("No Save data to delete found");
+            }
+
+            string GetSavePath()
+            {
+                return Application.persistentDataPath + "/saveData.json";
+            }
         }
         
         [MenuItem("Template/Scenes/Load")]

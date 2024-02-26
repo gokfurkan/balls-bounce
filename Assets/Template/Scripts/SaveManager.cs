@@ -53,7 +53,7 @@ namespace Template.Scripts
             }
         }
 
-        private string GetSavePath()
+        public string GetSavePath()
         {
             return Application.persistentDataPath + "/saveData.json";
         }

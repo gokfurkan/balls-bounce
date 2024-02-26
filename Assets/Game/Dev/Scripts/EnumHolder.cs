@@ -40,7 +40,10 @@
 
     public enum AudioType
     {
-        GameStart,
+        Pad,
+        MergeStart,
+        MergeComplete,
+        Pop, 
     }
 
     public enum PoolType

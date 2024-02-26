@@ -19,7 +19,7 @@ namespace Game.Dev.Scripts
         //Upgrade
         [Space(10)]
         public int minBallLevel = 0;
-        public int havePadAmount = 1;
+        public int havePadAmount = 0;
 
         [Space(10)]
         public int addPadStartCost = 700;
@@ -43,7 +43,7 @@ namespace Game.Dev.Scripts
         {
             moneys = 10;
             totalEarnedMoneys = 0;
-            havePadAmount = 1;
+            havePadAmount = 0;
             addPadStartCost = 700;
             addBallStartCost = 10;
             mergeBallStartCost = 10;

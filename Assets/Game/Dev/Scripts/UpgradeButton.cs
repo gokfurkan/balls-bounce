@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Game.Dev.Scripts.Scriptables;
+using MoreMountains.NiceVibrations;
 using Template.Scripts;
 using TMPro;
 using UnityEngine;
@@ -56,9 +57,6 @@ namespace Game.Dev.Scripts
             BusSystem.CallAddMoneys(-GetCostAmount());
             
             OnUpgrade();
-            StartCoroutine(ReEnableButtonDelay());
-            IncreaseUpgradeLevel();
-            Refresh();
         }
 
         private void OnUpgrade()
@@ -75,6 +73,13 @@ namespace Game.Dev.Scripts
                     UpgradeManager.instance.MergeBall();
                     break;
             }
+            
+            StartCoroutine(ReEnableButtonDelay());
+            IncreaseUpgradeLevel();
+            Refresh();
+            
+            AudioManager.instance.Play(AudioType.Pop);
+            HapticManager.instance.PlayHaptic(HapticTypes.MediumImpact);
         }
         
         private void Refresh()

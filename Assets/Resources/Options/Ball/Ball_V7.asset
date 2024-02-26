@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ball_V7
   m_EditorClassIdentifier: 
   level: 6
-  incomeAmount: 250
+  incomeAmount: 1000
   interactLayers:
     serializedVersion: 2
     m_Bits: 448

@@ -21,7 +21,7 @@ namespace Game.Dev.Scripts
 
         public void InitIncome(int incomeAmount)
         {
-            text.text = "+$" + incomeAmount;
+            text.text = "+$" + MoneyCalculator.NumberToStringFormatter(incomeAmount);
             text.DOColor(initColor, 0);
             textRect.transform.DOLocalMoveY(0, 0);
             textRect.transform.DOLocalMoveY(moveValue, moveDuration).OnComplete(() =>

@@ -1,5 +1,7 @@
 ﻿using DG.Tweening;
 using Game.Dev.Scripts.Interfaces;
+using MoreMountains.NiceVibrations;
+using Template.Scripts;
 using UnityEngine;
 
 namespace Game.Dev.Scripts
@@ -21,6 +23,9 @@ namespace Game.Dev.Scripts
             
             BusSystem.CallAddMoneys(incomeAmount);
             BusSystem.CallSpawnIncomeVisual(ball.transform , incomeAmount);
+            
+            AudioManager.instance.Play(AudioType.Pad);
+            HapticManager.instance.PlayHaptic(HapticTypes.LightImpact);
             
             sequence = DOTween.Sequence();
             sequence.Append(meshRenderer.material.DOFloat(bendAmount, Amplitude, bendDuration));

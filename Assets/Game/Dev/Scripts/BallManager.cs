@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using Game.Dev.Scripts.Scriptables;
+using MoreMountains.NiceVibrations;
 using Sirenix.OdinInspector;
 using Template.Scripts;
 using UnityEngine;
@@ -70,6 +71,7 @@ namespace Game.Dev.Scripts
                 balls.Remove(ball);
             }
             
+            AudioManager.instance.Play(AudioType.MergeStart);
             BusSystem.CallRefreshUpgradeValues();
            
             for (int i = 0; i < NEED_MERGE_AMOUNT; i++)
@@ -122,6 +124,8 @@ namespace Game.Dev.Scripts
                 }
                 
                 mergeParticle.Play();
+                AudioManager.instance.Play(AudioType.MergeComplete);
+                HapticManager.instance.PlayHaptic(HapticTypes.MediumImpact);
                 
                 var upgradedBall = BallPooling.instance.poolObjects[highestBalls[0].ballOptions.level + 1].GetItem();
                 var upgradedBallController = upgradedBall.GetComponent<BallController>();
