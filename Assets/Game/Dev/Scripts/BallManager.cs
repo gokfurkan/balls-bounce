@@ -233,6 +233,7 @@ namespace Game.Dev.Scripts
             {
                 SaveManager.instance.saveData.haveBallLevels.Add(balls[i].ballOptions.level);
             }
+            SaveManager.instance.Save();
         }
     }
 }
