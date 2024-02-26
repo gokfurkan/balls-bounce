@@ -124,23 +124,23 @@ namespace Game.Dev.Scripts
             {
                 case UpgradeType.AddPad:
                     saveData.addPadUpgradeLevel++;
-                    if (saveData.addPadUpgradeLevel % upgradeSettings.costValueMod == 0)
+                    if (saveData.addPadUpgradeLevel % upgradeSettings.padCostValueMod == 0)
                     {
-                        saveData.addPadCostIncrease *= upgradeSettings.costMultiplier;
+                        saveData.addPadCostIncrease *= upgradeSettings.padCostMultiplier;
                     }
                     break;
                 case UpgradeType.AddBall:
                     saveData.addBallUpgradeLevel++;
-                    if (saveData.addBallUpgradeLevel % upgradeSettings.costValueMod == 0)
+                    if (saveData.addBallUpgradeLevel % upgradeSettings.addBallCostValueMod == 0)
                     {
-                        saveData.addBallCostIncrease *= upgradeSettings.costMultiplier;
+                        saveData.addBallCostIncrease *= upgradeSettings.addBallCostMultiplier;
                     }
                     break;
                 case UpgradeType.MergeBall:
                     saveData.mergeBallUpgradeLevel++;
-                    if (saveData.mergeBallUpgradeLevel % upgradeSettings.costValueMod == 0)
+                    if (saveData.mergeBallUpgradeLevel % upgradeSettings.mergeCostValueMod == 0)
                     {
-                        saveData.mergeBallCostIncrease *= upgradeSettings.costMultiplier;
+                        saveData.mergeBallCostIncrease *= upgradeSettings.mergeCostMultiplier;
                     }
                     break;
             }

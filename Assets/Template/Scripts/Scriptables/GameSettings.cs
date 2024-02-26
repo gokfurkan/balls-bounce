@@ -78,8 +78,16 @@ namespace Game.Dev.Scripts.Scriptables
     [Serializable]
     public class UpgradeOptions
     {
-        public int costValueMod;
-        public int costMultiplier;
+        public int padCostValueMod;
+        public int padCostMultiplier;
+        
+        [Space(10)]
+        public int addBallCostValueMod;
+        public int addBallCostMultiplier;
+        
+        [Space(10)]
+        public int mergeCostValueMod;
+        public int mergeCostMultiplier;
         
         [Space(10)]
         public string maxText = "MAX ";

@@ -47,7 +47,11 @@ MonoBehaviour:
     mergeMoveDuration: 1.25
     afterMergeMoveUpDuration: 1.5
   upgradeOptions:
-    costValueMod: 3
-    costMultiplier: 2
+    padCostValueMod: 2
+    padCostMultiplier: 2
+    addBallCostValueMod: 3
+    addBallCostMultiplier: 2
+    mergeCostValueMod: 3
+    mergeCostMultiplier: 2
     maxText: 'MAX '
     costText: '$ '
