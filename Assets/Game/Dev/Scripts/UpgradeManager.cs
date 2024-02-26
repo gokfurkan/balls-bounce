@@ -18,7 +18,6 @@ namespace Game.Dev.Scripts
             }
             
             SaveManager.instance.saveData.havePadAmount++;
-            SaveManager.instance.Save();
             
             PadManager.instance.ActivatePads();
             BusSystem.CallRefreshUpgradeValues();

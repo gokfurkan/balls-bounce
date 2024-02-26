@@ -56,7 +56,6 @@ namespace Template.Scripts
         private void ResetMoneys()
         {
             SaveManager.instance.saveData.moneys = 0;
-            SaveManager.instance.Save();
 
             SetMoneyText();
         }
@@ -78,7 +77,6 @@ namespace Template.Scripts
                 moneyText.text = MoneyCalculator.NumberToStringFormatter(newMoneyTarget);
             }
             
-            SaveManager.instance.Save();
             BusSystem.CallRefreshUpgradeValues();
             BusSystem.CallRefreshLevelProgress();
         }

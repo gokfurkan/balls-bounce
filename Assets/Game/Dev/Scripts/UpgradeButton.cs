@@ -80,6 +80,8 @@ namespace Game.Dev.Scripts
             
             AudioManager.instance.Play(AudioType.Pop);
             HapticManager.instance.PlayHaptic(HapticTypes.MediumImpact);
+            
+            SaveManager.instance.Save();
         }
         
         private void Refresh()

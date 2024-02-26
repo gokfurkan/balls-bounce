@@ -57,5 +57,20 @@ namespace Template.Scripts
         {
             return Application.persistentDataPath + "/saveData.json";
         }
+
+        private void OnApplicationQuit()
+        {
+            Save();
+        }
+
+        private void OnApplicationFocus(bool hasFocus)
+        {
+            Save();
+        }
+
+        private void OnApplicationPause(bool pauseStatus)
+        {
+            Save();
+        }
     }
 }
