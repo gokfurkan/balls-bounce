@@ -110,7 +110,7 @@ namespace Game.Dev.Scripts
             {
                 foreach (var text in costTexts)
                 {
-                    text.text = MoneyCalculator.NumberToStringFormatter(GetCostAmount()) + upgradeSettings.costText;
+                    text.text = upgradeSettings.costText + MoneyCalculator.NumberToStringFormatter(GetCostAmount());
                 }
             }
         }

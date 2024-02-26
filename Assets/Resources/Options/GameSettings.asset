@@ -16,13 +16,13 @@ MonoBehaviour:
     nextSceneAfterLoad: 1
     loadFillOption:
     - stageAmount: 0.25
-      stageDuration: 0.35
-      nextStageDelay: 0.35
+      stageDuration: 1
+      nextStageDelay: 0.85
     - stageAmount: 0.8
-      stageDuration: 0.65
-      nextStageDelay: 0.4
+      stageDuration: 1.5
+      nextStageDelay: 1
     - stageAmount: 1
-      stageDuration: 0.25
+      stageDuration: 0.75
       nextStageDelay: 0
   gamePlayOptions:
     vSyncEnabled: 0

@@ -18,16 +18,18 @@ namespace Game.Dev.Scripts
 
         private void OnEnable()
         {
-            BusSystem.OnRefreshUpgradeValues += SetProgress;
+            BusSystem.OnRefreshLevelProgress += SetProgress;
         }
 
         private void OnDisable()
         {
-            BusSystem.OnRefreshUpgradeValues -= SetProgress;
+            BusSystem.OnRefreshLevelProgress -= SetProgress;
         }
 
-        private void Start()
+        protected override void Initialize()
         {
+            base.Initialize();
+            
             nextLevelButton.SetActive(false);
         }
 
@@ -35,11 +37,9 @@ namespace Game.Dev.Scripts
         {
             var progress = SaveManager.instance.saveData.totalEarnedMoneys;
             targetText.text = MoneyCalculator.NumberToStringFormatter(progress) + " / " + MoneyCalculator.NumberToStringFormatter(targetProgress);
+            
             fill.fillAmount = (float)progress / targetProgress;
-            if (fill.fillAmount >= 1)
-            {
-                nextLevelButton.SetActive(true);
-            }
+            nextLevelButton.SetActive(fill.fillAmount >= 1);
         }
 
         public void InitLevelProgress(int target)

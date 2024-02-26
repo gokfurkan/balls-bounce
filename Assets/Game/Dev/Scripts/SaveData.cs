@@ -13,8 +13,8 @@ namespace Game.Dev.Scripts
         public int totalEarnedMoneys;
 
         [Space(10)]
-        public bool sound;
-        public bool haptic;
+        public bool sound = true;
+        public bool haptic = true;
 
         //Upgrade
         [Space(10)]

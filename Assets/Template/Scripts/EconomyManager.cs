@@ -49,7 +49,7 @@ namespace Template.Scripts
             {
                 SaveManager.instance.saveData.totalEarnedMoneys += amount;
             }
-
+            
             SetMoneyText();
         }
 
@@ -78,7 +78,9 @@ namespace Template.Scripts
                 moneyText.text = MoneyCalculator.NumberToStringFormatter(newMoneyTarget);
             }
             
+            SaveManager.instance.Save();
             BusSystem.CallRefreshUpgradeValues();
+            BusSystem.CallRefreshLevelProgress();
         }
         
         private void SpawnMoneys()

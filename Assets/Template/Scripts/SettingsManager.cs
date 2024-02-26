@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 
 namespace Template.Scripts
@@ -13,8 +14,10 @@ namespace Template.Scripts
         [Space(10)]
         [SerializeField] private TextMeshProUGUI versionText;
 
-        private void Start()
+        private IEnumerator Start()
         {
+            yield return new WaitForSeconds(2);
+            
             InitSettings();
             InitGameVersion();
         }

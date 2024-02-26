@@ -57,10 +57,5 @@ namespace Template.Scripts
         {
             return Application.persistentDataPath + "/saveData.json";
         }
-
-        private void OnApplicationQuit()
-        {
-            SaveManager.instance.Save();
-        }
     }
 }
