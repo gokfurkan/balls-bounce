@@ -63,6 +63,9 @@ namespace Game.Dev.Scripts
         
         private IEnumerator ActivateEndPanelDelay(bool win)
         {
+            Activate(PanelType.Upgrade , false);
+            Activate(PanelType.OpenSettings , false);
+            Activate(PanelType.LevelProgress , false);
             Activate(PanelType.EndContinue , false);
             
             if (win)
