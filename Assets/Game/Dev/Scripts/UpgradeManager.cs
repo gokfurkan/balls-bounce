@@ -30,11 +30,13 @@ namespace Game.Dev.Scripts
         public void AddBall()
         {
             BusSystem.CallAddNewBall(SaveManager.instance.saveData.minBallLevel);
+            BusSystem.CallRefreshBallLevelList();
         }
 
         public void MergeBall()
         {
             BusSystem.CallMergeBall();
+            BusSystem.CallRefreshBallLevelList();
         }
 
         #endregion

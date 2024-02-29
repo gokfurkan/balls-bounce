@@ -31,6 +31,7 @@ namespace Game.Dev.Scripts
             BusSystem.OnAddNewBall += AddNewBall;
             BusSystem.OnMergeBall += MergeBall;
             BusSystem.OnReSpawnBall += ReSpawnBall;
+            BusSystem.OnRefreshBallLevelList += RefreshHaveBallLevelList;
         }
 
         private void OnDisable()
@@ -38,6 +39,7 @@ namespace Game.Dev.Scripts
             BusSystem.OnAddNewBall -= AddNewBall;
             BusSystem.OnMergeBall -= MergeBall;
             BusSystem.OnReSpawnBall -= ReSpawnBall;
+            BusSystem.OnRefreshBallLevelList -= RefreshHaveBallLevelList;
         }
         
         private void Start()
@@ -53,7 +55,6 @@ namespace Game.Dev.Scripts
 
             var createdBallController = createdBall.GetComponent<BallController>();
             balls.Add(createdBallController);
-            SetHaveBallLevelList();
             
             SpawnBall(createdBallController);
             BusSystem.CallRefreshUpgradeValues();
@@ -134,11 +135,12 @@ namespace Game.Dev.Scripts
                 upgradedBall.transform.SetParent(ballHolder, true);
                 upgradedBall.transform.position = mergePoints[2].position;
                 upgradedBall.gameObject.SetActive(true);
-
-                SetHaveBallLevelList();
                 
                 Tween moveTween = upgradedBall.transform.DOMove(mergePoints[3].position, gameSettings.ballManagerOptions.afterMergeMoveUpDuration);
-                moveTween.OnComplete(() => SpawnBall(upgradedBall.GetComponent<BallController>()));
+                moveTween.OnComplete(() =>
+                {
+                    SpawnBall(upgradedBall.GetComponent<BallController>());
+                });
             }
         }
 
@@ -226,7 +228,7 @@ namespace Game.Dev.Scripts
             return FindMergeBalls().Count == NEED_MERGE_AMOUNT;
         }
 
-        private void SetHaveBallLevelList()
+        private void RefreshHaveBallLevelList()
         {
             SaveManager.instance.saveData.haveBallLevels.Clear();
             for (int i = 0; i < balls.Count; i++)
